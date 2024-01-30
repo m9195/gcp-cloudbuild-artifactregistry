@@ -13,7 +13,7 @@ spec:
       app: pythonapp
   template:
     metadata:
-      name: nodeapppod
+      name: pythonapppod
       labels:
         type: backend
         app: pythonapp
@@ -22,4 +22,4 @@ spec:
         - name: pythoncontainer
           image: us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/test-app
           ports:
-            - containerPort: 81
+            - containerPort: 5001
