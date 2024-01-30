@@ -20,3 +20,12 @@ steps:
 images:
   - us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/my-app:${SHORT_SHA}
   - us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/my-app:latest
+  
+# deploy container image to GKE
+- name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=deployment.yaml
+  - --image=us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/my-app:${SHORT_SHA}
+  - --location=us-central1
+  - --cluster=pythontest-cluster-1
