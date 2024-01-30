@@ -20,6 +20,6 @@ spec:
     spec:
       containers:
         - name: pythoncontainer
-          image: us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/my-app:${SHORT_SHA}
+          image: us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/test-app
           ports:
             - containerPort: 81
