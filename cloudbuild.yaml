@@ -4,28 +4,23 @@ steps:
     args: [
             'build',
             '-t',
-            'us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/my-app:${SHORT_SHA}',
-            '-t',
-            'us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/my-app:latest',
-            '--cache-from',
-            'us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/my-app:latest',
+            'us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/test-app',
             '.'
           ]
 
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push',  'us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/my-app:${SHORT_SHA}']
+    args: ['push',  'us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/test-app']
 
 # Store images in Google Artifact Registry 
-images:
-  - us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/my-app:${SHORT_SHA}
-  - us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/my-app:latest
+#images:
+ # - us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/test-app
   
 # deploy container image to GKE
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
     - run
     - --filename=deployment.yaml
-    - --image=us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/my-app:${SHORT_SHA}
+    - --image=us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/test-app
     - --location=us-central1
     - --cluster=pythontest-cluster-1
