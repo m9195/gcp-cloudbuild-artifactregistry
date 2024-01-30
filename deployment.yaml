@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  pythonappdeployment
+  labels:
+    type: backend
+    app: pythonapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: backend
+      app: pythonapp
+  template:
+    metadata:
+      name: nodeapppod
+      labels:
+        type: backend
+        app: pythonapp
+    spec:
+      containers:
+        - name: pythoncontainer
+          image: us-central1-docker.pkg.dev/trusty-sentinel-412713/pythonrepo/my-app:${SHORT_SHA}
+          ports:
+            - containerPort: 81
